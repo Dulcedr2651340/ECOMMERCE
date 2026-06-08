@@ -16,8 +16,13 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
+    //LISTAR PRODUCTOS
     public List<Producto> listarProductos() {
         return productoRepository.findAll();
     }
-    
+
+    //BUSCAR PRODUCTOS
+    public Producto buscarPorId(Integer id){
+        return productoRepository.findById(id).orElse(null);
+    }    
 }
