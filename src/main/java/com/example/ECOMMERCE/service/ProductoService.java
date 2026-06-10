@@ -25,4 +25,14 @@ public class ProductoService {
     public Producto buscarPorId(Integer id){
         return productoRepository.findById(id).orElse(null);
     }    
+
+    //GUARDAR PRODUCTO
+    public Producto guardarProducto(Producto producto){
+        return productoRepository.save(producto);
+    }
+
+    //ELIMINAR PRODUCTO
+    public void eliminarProducto(Integer id){
+        productoRepository.deleteById(id);
+    }
 }
