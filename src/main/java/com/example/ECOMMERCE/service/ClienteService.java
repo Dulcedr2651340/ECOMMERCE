@@ -31,6 +31,18 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
+    //ACTUALIZAR CLIENTE
+    public Cliente actualizarCliente(Integer idCliente, Cliente clienteActualizar){
+
+        Cliente cliente = clienteRepository.findById(idCliente).orElse(null);
+        if(cliente != null){
+            cliente.setNombre(clienteActualizar.getNombre());
+            cliente.setCorreo(clienteActualizar.getCorreo());
+            cliente.setTelefono(clienteActualizar.getTelefono());
+        }
+        return null;
+    }
+
     //ELIMINAR CLIENTE
     public void eliminarCliente(Integer idCliente){
         clienteRepository.deleteById(idCliente);

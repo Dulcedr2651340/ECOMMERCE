@@ -2,6 +2,8 @@ package com.example.ECOMMERCE.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +17,10 @@ public class Producto {
     private Double precio;
     private String marca;
     private Integer garantia;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
 
     public Producto() {
     }
@@ -67,8 +73,12 @@ public class Producto {
         this.garantia = garantia;
     }
 
-    
-    
-    
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
     
 }

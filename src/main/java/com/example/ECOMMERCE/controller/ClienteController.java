@@ -29,7 +29,7 @@ public class ClienteController{
         return clienteService.listarClientes();
     }
 
-    @GetMapping("/clientes/{id}")
+    @GetMapping("/clientes/{idCliente}")
     public Cliente buscaPorId(@PathVariable Integer idCliente){
         return clienteService.buscarPorId(idCliente);
     }
@@ -39,7 +39,7 @@ public class ClienteController{
         return clienteService.guardarCliente(cliente);
     }
 
-    @DeleteMapping("/clientes/{id}")
+    @DeleteMapping("/clientes/{idCliente}")
     public void eliminarCliente(@PathVariable Integer idCliente){
         clienteService.eliminarCliente(idCliente);
     }
