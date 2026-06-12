@@ -31,6 +31,20 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
+    //ACTUALIZAR PRODUCTO
+    public Producto actualizaProducto(Integer id, Producto productoActualizar){
+
+        Producto producto = productoRepository.findById(id).orElse(null);
+        if(producto != null){
+            producto.setNombre(productoActualizar.getNombre());
+            producto.setPrecio(productoActualizar.getPrecio());
+            producto.setMarca(productoActualizar.getMarca());
+            producto.setGarantia(productoActualizar.getGarantia());
+            return productoRepository.save(producto);
+        }
+        return null;
+    }
+
     //ELIMINAR PRODUCTO
     public void eliminarProducto(Integer id){
         productoRepository.deleteById(id);

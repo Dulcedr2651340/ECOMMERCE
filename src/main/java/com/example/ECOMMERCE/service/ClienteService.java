@@ -2,15 +2,20 @@ package com.example.ECOMMERCE.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 
 import com.example.ECOMMERCE.model.Cliente;
 import com.example.ECOMMERCE.repository.ClienteRepository;
 
+
 @Service
 public class ClienteService {
     
     private final ClienteRepository clienteRepository;
+    private static final Logger log = LoggerFactory.getLogger(ClienteService.class);
 
     public ClienteService(ClienteRepository clienteRepository){
         this.clienteRepository = clienteRepository;
@@ -28,7 +33,13 @@ public class ClienteService {
 
     //GUARDAR CLIENTE
     public Cliente guardarCliente(Cliente cliente){
-        return clienteRepository.save(cliente);
+
+        MDC.put("operacion", "guardarCliente");
+        log.info("Guardando cliente {}", cliente.getNombre());
+        Cliente resultado = clienteRepository.save(cliente);
+        MDC.clear();
+        return resultado;
+        //return clienteRepository.save(cliente);
     }
 
     //ACTUALIZAR CLIENTE
@@ -39,6 +50,7 @@ public class ClienteService {
             cliente.setNombre(clienteActualizar.getNombre());
             cliente.setCorreo(clienteActualizar.getCorreo());
             cliente.setTelefono(clienteActualizar.getTelefono());
+            return clienteRepository.save(cliente);
         }
         return null;
     }

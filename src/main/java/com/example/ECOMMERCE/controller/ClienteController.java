@@ -40,7 +40,7 @@ public class ClienteController{
         return clienteService.guardarCliente(cliente);
     }
 
-    @PutMapping("/cliente/{idCliente}")
+    @PutMapping("/clientes/{idCliente}")
     public Cliente actualizarCliente(@PathVariable Integer idCliente, @RequestBody Cliente clienteActualizar){
         return clienteService.actualizarCliente(idCliente, clienteActualizar);
     }
