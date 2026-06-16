@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ECOMMERCE.model.Producto;
 import com.example.ECOMMERCE.service.ProductoService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1")
 public class ProductoController {
@@ -35,12 +37,12 @@ public class ProductoController {
     }
 
     @PostMapping("/productos")
-    public Producto guaProducto(@RequestBody Producto producto){
+    public Producto guardarProducto(@Valid @RequestBody Producto producto){
         return productoService.guardarProducto(producto);
     }
 
     @PutMapping("/productos/{id}")
-    public Producto actualizarProducto(@PathVariable Integer id, @RequestBody Producto productoActualizar){
+    public Producto actualizarProducto(@PathVariable Integer id,  @Valid @RequestBody Producto productoActualizar){
         return productoService.actualizaProducto(id, productoActualizar);
     }
 
@@ -48,4 +50,9 @@ public class ProductoController {
     public void eliminarProducto(@PathVariable Integer id){
         productoService.eliminarProducto(id);
     }
+
+    @PostMapping("/validacion")
+public String validar(@Valid @RequestBody Producto producto){
+    return "VALIDO";
+}
 }

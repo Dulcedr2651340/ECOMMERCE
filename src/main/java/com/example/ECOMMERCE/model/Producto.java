@@ -5,6 +5,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "producto")
@@ -13,9 +16,16 @@ public class Producto {
     @Id
     private Integer id;
 
+    @NotBlank(message="El nombre es obligatorio")
     private String nombre;
+
+    @Positive
     private Double precio;
+
+    @NotBlank(message="La marca es obligatorio")
     private String marca;
+
+    @Min(1)
     private Integer garantia;
 
     @ManyToOne

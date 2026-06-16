@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ECOMMERCE.model.Categoria;
 import com.example.ECOMMERCE.service.CategoriaService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1")
 public class CategoriaController {
@@ -35,12 +37,12 @@ public class CategoriaController {
     }
 
     @PostMapping("/categorias")
-    public Categoria guardarCategoria(@RequestBody Categoria categoria){
+    public Categoria guardarCategoria(@Valid @RequestBody Categoria categoria){
         return categoriaService.guardCategoria(categoria);
     }
 
     @PutMapping("/categorias/{idCategoria}")
-    public Categoria actualizarCategoria(@PathVariable Integer idCategoria, @RequestBody Categoria categoriaActualiar){
+    public Categoria actualizarCategoria(@Valid @PathVariable Integer idCategoria, @RequestBody Categoria categoriaActualiar){
         return categoriaService.actualizarCategoria(idCategoria, categoriaActualiar);
     }
     

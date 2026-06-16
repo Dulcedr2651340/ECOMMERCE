@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "categoria")
@@ -12,7 +13,11 @@ public class Categoria{
     @Id
     @Column(name = "id_categoria")
     private Integer idCategoria;
+
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+
+    @NotBlank(message = "La descripcion es obligatorio")
     private String descripcion;
     
     public Categoria() {
