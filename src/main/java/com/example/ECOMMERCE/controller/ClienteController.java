@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ECOMMERCE.model.Cliente;
 import com.example.ECOMMERCE.service.ClienteService;
 
+import jakarta.validation.Valid;
+
 
 
 @RestController
@@ -36,12 +38,12 @@ public class ClienteController{
     }
 
     @PostMapping("/clientes")
-    public Cliente guardarCliente(@RequestBody Cliente cliente){
+    public Cliente guardarCliente(@Valid @RequestBody Cliente cliente){
         return clienteService.guardarCliente(cliente);
     }
 
     @PutMapping("/clientes/{idCliente}")
-    public Cliente actualizarCliente(@PathVariable Integer idCliente, @RequestBody Cliente clienteActualizar){
+    public Cliente actualizarCliente(@PathVariable Integer idCliente, @Valid @RequestBody Cliente clienteActualizar){
         return clienteService.actualizarCliente(idCliente, clienteActualizar);
     }
 

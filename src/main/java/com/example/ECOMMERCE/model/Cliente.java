@@ -4,6 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -13,15 +16,19 @@ public class Cliente {
     @Id
     @Column(name = "id_cliente")
     private Integer idCliente;
+
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+
+    @Email(message = "Correo inválido")
     private String correo;
+
+    @Size(min = 9, max = 9)
     private String telefono;
 
     public Cliente(){
 
     }
-
-    
 
     public Cliente(Integer idCliente, String nombre, String correo, String telefono) {
         this.idCliente = idCliente;
