@@ -1,9 +1,11 @@
 package com.example.ECOMMERCE.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.ECOMMERCE.dto.ProductoDTO;
 import com.example.ECOMMERCE.model.Producto;
 import com.example.ECOMMERCE.repository.ProductoRepository;
 
@@ -17,9 +19,25 @@ public class ProductoService {
     }
 
     //LISTAR PRODUCTOS
-    public List<Producto> listarProductos() {
-        return productoRepository.findAll();
+    public List<ProductoDTO> listarProductos() {
+
+        List<Producto> productos = productoRepository.findAll();
+        List<ProductoDTO> productosDTO = new ArrayList<>();
+
+        for(Producto producto : productos){
+
+            ProductoDTO dto = new ProductoDTO();
+
+            dto.setNombre(producto.getNombre());
+            dto.setPrecio(producto.getPrecio());
+
+            productosDTO.add(dto);
+
+        }
+
+        return productosDTO;
     }
+    
 
     //BUSCAR PRODUCTOS
     public Producto buscarPorId(Integer id){

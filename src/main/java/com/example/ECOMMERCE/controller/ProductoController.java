@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ECOMMERCE.dto.ProductoDTO;
 import com.example.ECOMMERCE.model.Producto;
 import com.example.ECOMMERCE.service.ProductoService;
 
@@ -27,7 +28,7 @@ public class ProductoController {
     }
 
     @GetMapping("/productos")
-    public List<Producto> listarProductos() {
+    public List<ProductoDTO> listarProductos() {
         return productoService.listarProductos();
     }
 
