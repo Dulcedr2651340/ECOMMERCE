@@ -4,6 +4,7 @@ public class ProductoDTO {
 
     private String nombre;
     private Double precio;
+    private String categoria;
 
     public ProductoDTO() {
     }
@@ -25,6 +26,17 @@ public class ProductoDTO {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
+
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
     
     
 }

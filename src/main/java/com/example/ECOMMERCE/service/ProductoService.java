@@ -26,14 +26,22 @@ public class ProductoService {
 
         for(Producto producto : productos){
 
-            ProductoDTO dto = new ProductoDTO();
+    System.out.println("ID: " + producto.getId());
+    System.out.println("Categoria: " + producto.getCategoria());
 
-            dto.setNombre(producto.getNombre());
-            dto.setPrecio(producto.getPrecio());
+    ProductoDTO dto = new ProductoDTO();
 
-            productosDTO.add(dto);
+    dto.setNombre(producto.getNombre());
+    dto.setPrecio(producto.getPrecio());
 
-        }
+    dto.setCategoria(
+        producto.getCategoria()!=null
+        ? producto.getCategoria().getNombre()
+        : "Sin categoría"
+);
+
+    productosDTO.add(dto);
+}
 
         return productosDTO;
     }
