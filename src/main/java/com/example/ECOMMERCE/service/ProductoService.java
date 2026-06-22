@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.ECOMMERCE.Exception.ProductoNoEncontradoException;
 import com.example.ECOMMERCE.dto.ProductoDTO;
 import com.example.ECOMMERCE.model.Producto;
 import com.example.ECOMMERCE.repository.ProductoRepository;
@@ -49,7 +50,12 @@ public class ProductoService {
 
     //BUSCAR PRODUCTOS
     public Producto buscarPorId(Integer id){
-        return productoRepository.findById(id).orElse(null);
+        return productoRepository.findById(id)
+        .orElseThrow(
+            () -> new ProductoNoEncontradoException(
+                "Producto con id " + id + " no encontrado"
+            )
+        );
     }    
 
     //GUARDAR PRODUCTO

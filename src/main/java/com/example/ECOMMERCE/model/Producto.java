@@ -1,6 +1,8 @@
 package com.example.ECOMMERCE.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,23 +16,31 @@ import jakarta.validation.constraints.Positive;
 public class Producto {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotBlank(message="El nombre es obligatorio")
     private String nombre;
 
-    @Positive
+    @Positive(message="El precio debe ser mayor a 0")
     private Double precio;
 
     @NotBlank(message="La marca es obligatorio")
     private String marca;
 
-    @Min(1)
+    @Min(value = 1,
+     message = "La garantía debe ser mayor o igual a 1")
     private Integer garantia;
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
+
+    
+    @ManyToOne
+    @JoinColumn(name="id_cliente")
+    private Cliente cliente;
+
 
     public Producto() {
     }

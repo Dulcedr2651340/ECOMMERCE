@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 
+import com.example.ECOMMERCE.Exception.ClienteNoEncontradoException;
 import com.example.ECOMMERCE.model.Cliente;
 import com.example.ECOMMERCE.repository.ClienteRepository;
 
@@ -28,7 +29,12 @@ public class ClienteService {
 
     //BUSCAR PRODUCTOS
     public Cliente buscarPorId(Integer idCliente){
-        return clienteRepository.findById(idCliente).orElse(null);
+        return clienteRepository.findById(idCliente)
+                .orElseThrow(
+                    () -> new ClienteNoEncontradoException(
+                        "Producto con id " + idCliente + " no encontrado"
+                    )
+                );
     }
 
     //GUARDAR CLIENTE

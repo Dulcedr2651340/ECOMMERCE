@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.ECOMMERCE.Exception.CategoriaNoEncontradoException;
 import com.example.ECOMMERCE.model.Categoria;
 import com.example.ECOMMERCE.repository.CategoriaRepository;
 
@@ -23,7 +24,13 @@ public class CategoriaService {
 
     //BUSCAR CATEGORIAS
     public Categoria buscarPorId(Integer idCategoria){
-        return categoriaRepository.findById(idCategoria).orElse(null);
+        return categoriaRepository.findById(idCategoria)
+                    .orElseThrow(
+                        () -> new CategoriaNoEncontradoException(
+                            "Producto con id " + idCategoria + " no encontrado"
+                        )
+                    )
+                    ;
     }
 
     //GUARDAR CATEGORIAS
