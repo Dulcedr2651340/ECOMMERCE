@@ -33,7 +33,7 @@ public class Cliente {
     private String telefono;
 
     @OneToMany(mappedBy = "cliente")
-    private List<Producto> productos;
+    private List<Pedido> pedidos;
 
     public Cliente(){
 

@@ -36,7 +36,7 @@ public class Categoria{
         return idCategoria;
     }
 
-    public void setIdcategoria(Integer idCategoria) {
+    public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 

@@ -36,12 +36,6 @@ public class Producto {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
-    
-    @ManyToOne
-    @JoinColumn(name="id_cliente")
-    private Cliente cliente;
-
-
     public Producto() {
     }
 
