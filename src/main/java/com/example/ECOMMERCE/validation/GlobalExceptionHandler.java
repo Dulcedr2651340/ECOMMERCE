@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.example.ECOMMERCE.Exception.CategoriaNoEncontradoException;
 import com.example.ECOMMERCE.Exception.ClienteNoEncontradoException;
+import com.example.ECOMMERCE.Exception.PedidoNoEncontradoException;
 import com.example.ECOMMERCE.Exception.ProductoNoEncontradoException;
 
 @RestControllerAdvice
@@ -80,5 +81,18 @@ public class GlobalExceptionHandler {
 
     return response;
 }
-    
+
+    @ExceptionHandler(PedidoNoEncontradoException.class)
+    public ErrorResponse manejarClienteNoEncontrado(
+        PedidoNoEncontradoException ex){
+
+    ErrorResponse response = new ErrorResponse();
+
+    response.setStatus(HttpStatus.NOT_FOUND.value());
+    response.setMensaje(ex.getMessage());
+    response.setFecha(LocalDateTime.now());
+    response.setErrores(null);
+
+    return response;
+}   
 }
