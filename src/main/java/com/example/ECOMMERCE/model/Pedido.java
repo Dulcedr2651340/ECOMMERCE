@@ -35,7 +35,7 @@ public class Pedido {
     private Cliente cliente;
 
     @OneToMany(mappedBy = "pedido")
-    private List<DetallePedido> detalles;
+    private List<PedidoDetalle> detalles;
 
     public Pedido() {
     }
@@ -79,11 +79,11 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public List<DetallePedido> getDetalles() {
+    public List<PedidoDetalle> getDetalles() {
         return detalles;
     }
 
-    public void setDetalles(List<DetallePedido> detalles) {
+    public void setDetalles(List<PedidoDetalle> detalles) {
         this.detalles = detalles;
     }
 

@@ -1,26 +1,45 @@
 package com.example.ECOMMERCE.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name="detalle_pedido")
-public class DetallePedido {
+public class PedidoDetalle {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_detalle")
     private Integer idDetalle;
+
+    @Min(value = 1, message = "La cantidad debe ser mayor a 0")
     private Integer cantidad;
+
+    @Positive(message = "El subtotal debe ser mayor a 0")
     private Double  subTotal;
     
+    @ManyToOne
+    @JoinColumn(name="id_pedido")
     private Pedido pedido;
 
+    @ManyToOne
+    @JoinColumn(name="id_producto")
     private Producto producto;
 
-    public DetallePedido() {
+    public PedidoDetalle() {
     }
 
     
 
-    public DetallePedido(Integer idDetalle, Integer cantidad, Double subTotal) {
+    public PedidoDetalle(Integer idDetalle, Integer cantidad, Double subTotal) {
         this.idDetalle = idDetalle;
         this.cantidad = cantidad;
         this.subTotal = subTotal;
@@ -68,6 +87,5 @@ public class DetallePedido {
         this.producto = producto;
     }
 
-    
     
 }
