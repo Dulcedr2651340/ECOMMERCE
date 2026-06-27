@@ -18,9 +18,11 @@ public class Categoria{
     private Integer idCategoria;
 
     @NotBlank(message = "El nombre es obligatorio")
+    @Column(nullable=false)
     private String nombre;
 
     @NotBlank(message = "La descripcion es obligatorio")
+    @Column(nullable=false)
     private String descripcion;
     
     public Categoria() {

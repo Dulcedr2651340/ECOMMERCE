@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.ECOMMERCE.Exception.PedidoDetalleNoEncontradoException;
 import com.example.ECOMMERCE.dto.PedidoDetalleDTO;
 import com.example.ECOMMERCE.model.PedidoDetalle;
 import com.example.ECOMMERCE.repository.PedidoDetalleRepository;
@@ -27,66 +28,133 @@ public class PedidoDetalleService {
     }
 
 
-
+    //LISTAR PEDIDO DETALLE
     public List<PedidoDetalleDTO> listarPedidoDetalles(){
 
+    List<PedidoDetalle> detalles =
+            pedidoDetalleRepository.findAll();
 
-        List<PedidoDetalle> detalles =
-                pedidoDetalleRepository.findAll();
-
-
-
-        List<PedidoDetalleDTO> dtos =
-                new ArrayList<>();
+    List<PedidoDetalleDTO> dtos =
+            new ArrayList<>();
 
 
+    for(PedidoDetalle detalle : detalles){
 
-        for(PedidoDetalle detalle : detalles){
-
-
-            PedidoDetalleDTO dto =
-                    new PedidoDetalleDTO();
+        PedidoDetalleDTO dto =
+                new PedidoDetalleDTO();
 
 
-
-            dto.setProducto(
-
-                    detalle.getProducto()!=null
-
-                    ?
-
-                    detalle.getProducto().getNombre()
-
-                    :
-
-                    "Sin producto"
-
-            );
+        dto.setIdDetalle(
+                detalle.getIdDetalle()
+        );
 
 
-            dto.setCantidad(
-
-                    detalle.getCantidad()
-
-            );
+        dto.setCantidad(
+                detalle.getCantidad()
+        );
 
 
-            dto.setSubTotal(
+        dto.setSubtotal(
 
-                    detalle.getSubTotal()
+        detalle.getSubTotal()
 
-            );
-
-
-            dtos.add(dto);
-
-        }
+);
 
 
+        dto.setProducto(
 
-        return dtos;
+                detalle.getProducto()!=null ?
+
+                detalle.getProducto().getNombre()
+
+                :
+
+                "Sin producto"
+
+        );
+
+
+        dto.setIdPedido(
+
+                detalle.getPedido()!=null ?
+
+                detalle.getPedido().getIdPedido()
+
+                :
+
+                null
+
+        );
+
+
+        dto.setCliente(
+
+                detalle.getPedido()!=null
+                && detalle.getPedido().getCliente()!=null
+
+                ?
+
+                detalle.getPedido()
+                        .getCliente()
+                        .getNombre()
+
+                :
+
+                "Sin cliente"
+
+        );
+
+
+        dtos.add(dto);
 
     }
 
+    return dtos;
+}
+
+
+    //BUSCAR PEDIDO DETALLE
+    public PedidoDetalle buscarDetallePedidoPorId(Integer idDetalle){
+        return pedidoDetalleRepository.findById(idDetalle)
+                .orElseThrow(
+                        () -> new PedidoDetalleNoEncontradoException(
+                                "Detalle con id" + idDetalle + " no encontrado")
+                );
+        }
+
+   //GUARDAR PEDIDO DETALLE     
+   public PedidoDetalle guardarDetalle(PedidoDetalle detalle){
+        return pedidoDetalleRepository.save(detalle);
+   }     
+
+   //ACTUALIZAR PEDIDO DETALLE
+   public PedidoDetalle actualizaDetalle(Integer idDetalle, PedidoDetalle detalleActualizar){
+        PedidoDetalle detalle = buscarDetallePedidoPorId(idDetalle);
+        detalle.setCantidad(
+                detalleActualizar.getCantidad()
+        );
+
+        detalle.setSubTotal(
+                detalleActualizar.getSubTotal()
+        );
+
+        detalle.setProducto(
+                detalleActualizar.getProducto()
+        );
+
+        detalle.setPedido(
+                detalleActualizar.getPedido()
+        );
+
+        return pedidoDetalleRepository.save(detalle);
+   }
+
+   //ELIMINAR PEDIDO DETALLE
+   public void eliminarDetalle(Integer idDetalle){
+        buscarDetallePedidoPorId(idDetalle);
+        pedidoDetalleRepository.deleteById(idDetalle);
+   }
+
+   
 
 }

@@ -2,6 +2,8 @@ package com.example.ECOMMERCE.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +34,8 @@ public class Cliente {
     @Size(min = 9, max = 9, message = "Tienen que ser 9 digitos")
     private String telefono;
 
-    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore
+    @OneToMany(mappedBy="cliente")
     private List<Pedido> pedidos;
 
     public Cliente(){

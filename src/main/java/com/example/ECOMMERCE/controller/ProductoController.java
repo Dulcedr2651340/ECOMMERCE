@@ -53,7 +53,8 @@ public class ProductoController {
     }
 
     @PostMapping("/validacion")
-public String validar(@Valid @RequestBody Producto producto){
+    public String validar(@Valid @RequestBody Producto producto){
     return "VALIDO";
-}
+   
+   }
 }

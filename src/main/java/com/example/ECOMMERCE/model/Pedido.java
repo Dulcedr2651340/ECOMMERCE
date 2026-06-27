@@ -1,9 +1,12 @@
 package com.example.ECOMMERCE.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,27 +18,32 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
-@Table(name="pedido")
+@Table(name = "pedido")
 public class Pedido {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pedido")
     private Integer idPedido;
 
     @CreationTimestamp
-    private LocalDateTime fecha;   
+    private LocalDateTime fecha;
+
+    @Positive(message = "El total debe ser mayor a 0")
     private Double total;
 
     @ManyToOne
-    @JoinColumn(name="id_cliente")
+    @JoinColumn(name = "id_cliente")
     @NotNull(message = "El cliente es obligatorio")
     private Cliente cliente;
 
     @OneToMany(mappedBy = "pedido")
-    private List<PedidoDetalle> detalles;
+    @JsonIgnore
+    private List<PedidoDetalle> detalles = new ArrayList<>();
+
 
     public Pedido() {
     }
@@ -46,6 +54,7 @@ public class Pedido {
         this.total = total;
         this.cliente = cliente;
     }
+
 
     public Integer getIdPedido() {
         return idPedido;
