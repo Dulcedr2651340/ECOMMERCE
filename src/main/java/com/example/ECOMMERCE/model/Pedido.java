@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -18,7 +16,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "pedido")
@@ -29,10 +26,8 @@ public class Pedido {
     @Column(name = "id_pedido")
     private Integer idPedido;
 
-    @CreationTimestamp
     private LocalDateTime fecha;
 
-    @Positive(message = "El total debe ser mayor a 0")
     private Double total;
 
     @ManyToOne

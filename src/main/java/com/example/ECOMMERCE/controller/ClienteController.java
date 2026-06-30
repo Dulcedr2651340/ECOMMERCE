@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ECOMMERCE.dto.ClienteDTO;
 import com.example.ECOMMERCE.model.Cliente;
 import com.example.ECOMMERCE.service.ClienteService;
 
@@ -28,7 +29,7 @@ public class ClienteController{
     }
 
     @GetMapping("/clientes")
-    public List<Cliente> listarClientes(){
+    public List<ClienteDTO> listarClientes(){
         return clienteService.listarClientes();
     }
 

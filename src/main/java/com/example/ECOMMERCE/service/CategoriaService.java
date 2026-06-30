@@ -1,10 +1,12 @@
 package com.example.ECOMMERCE.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.ECOMMERCE.Exception.CategoriaNoEncontradoException;
+import com.example.ECOMMERCE.dto.CategoriaDTO;
 import com.example.ECOMMERCE.model.Categoria;
 import com.example.ECOMMERCE.repository.CategoriaRepository;
 
@@ -18,8 +20,22 @@ public class CategoriaService {
     }
 
     //LISTAR CATEGORIAS
-    public List<Categoria> listarCategoria(){
-        return categoriaRepository.findAll();
+    public List<CategoriaDTO> listarCategoria(){
+
+        List<Categoria> categorias = categoriaRepository.findAll();
+        List<CategoriaDTO> categoriaDTO = new ArrayList<>();
+
+        for(Categoria categoria : categorias){
+
+            CategoriaDTO dto = new CategoriaDTO();
+
+            dto.setIdCategoria(categoria.getIdCategoria());
+            dto.setNombre(categoria.getNombre());
+            dto.setDescripcion(categoria.getDescripcion());
+
+            categoriaDTO.add(dto);
+        }
+        return categoriaDTO;
     }  
 
     //BUSCAR CATEGORIAS

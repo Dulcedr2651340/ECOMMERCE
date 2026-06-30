@@ -23,23 +23,26 @@ public class PedidoService {
     //LISTAR PEDIDOS
     public List<PedidoDTO> listarPedidos(){
 
-        List<PedidoDTO> pedidoDTOs = new ArrayList<>();
+        List<PedidoDTO> pedidoDTO = new ArrayList<>();
         List<Pedido> pedidos = pedidoRepository.findAll();
 
         for(Pedido pedido : pedidos){
 
-    PedidoDTO dto = new PedidoDTO();
+            PedidoDTO dto = new PedidoDTO();
+            dto.setIdPedido(pedido.getIdPedido());
+            dto.setFecha(pedido.getFecha());
+            dto.setTotal(pedido.getTotal());
 
-    dto.setIdPedido(pedido.getIdPedido());
-    dto.setFecha(pedido.getFecha());
-    dto.setTotal(pedido.getTotal());
-    dto.setCliente(pedido.getCliente()!=null?
-        pedido.getCliente().getNombre() : "Sin cliente" );
+            dto.setCliente(
+                pedido.getCliente() != null
+                ? pedido.getCliente().getNombre()
+                : "Sin cliente"
+            );
 
-    pedidoDTOs.add(dto); 
+            pedidoDTO.add(dto); 
         
     }
-        return pedidoDTOs;
+        return pedidoDTO;
    
 
     }

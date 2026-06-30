@@ -1,5 +1,6 @@
 package com.example.ECOMMERCE.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 
 import com.example.ECOMMERCE.Exception.ClienteNoEncontradoException;
+import com.example.ECOMMERCE.dto.ClienteDTO;
 import com.example.ECOMMERCE.model.Cliente;
 import com.example.ECOMMERCE.repository.ClienteRepository;
 
@@ -23,8 +25,23 @@ public class ClienteService {
     }
 
     //LISTAR CLIENTES
-    public List<Cliente> listarClientes(){
-        return clienteRepository.findAll();
+    public List<ClienteDTO> listarClientes(){
+
+        List<Cliente> clientes = clienteRepository.findAll();
+        List<ClienteDTO> clienteDTO= new ArrayList<>();
+
+        for(Cliente cliente : clientes){
+
+            ClienteDTO dto = new ClienteDTO();
+            dto.setIdCliente(cliente.getIdCliente());
+            dto.setNombre(cliente.getNombre());
+            dto.setCorreo(cliente.getCorreo());
+            dto.setTelefono(cliente.getTelefono());
+
+            clienteDTO.add(dto);
+        }
+
+        return clienteDTO;
     }
 
     //BUSCAR PRODUCTOS

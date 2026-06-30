@@ -11,9 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -25,13 +22,10 @@ public class Cliente {
     @Column(name = "id_cliente")
     private Integer idCliente;
 
-    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
-    @Email(message = "Correo inválido")
     private String correo;
 
-    @Size(min = 9, max = 9, message = "Tienen que ser 9 digitos")
     private String telefono;
 
     @JsonIgnore

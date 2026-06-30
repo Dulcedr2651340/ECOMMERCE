@@ -2,22 +2,38 @@ package com.example.ECOMMERCE.dto;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+@JsonPropertyOrder({
+    "idPedido",
+    "fecha",
+    "total",
+    "cliente"
+})
 
 public class PedidoDTO {
     
+    @Column(name = "id_pedido")
     private Integer idPedido;
-    private String cliente;
+
+    @CreationTimestamp
     private LocalDateTime fecha;
+
+    @Positive(message = "El total debe ser mayor a 0")
     private Double total;
 
-    public PedidoDTO() {
-    }
+    @JoinColumn(name = "id_cliente")
+    @NotNull(message = "El cliente es obligatorio")
+    private String cliente;
 
-    public PedidoDTO(Integer idPedido, String cliente, LocalDateTime fecha, Double total) {
-        this.idPedido = idPedido;
-        this.cliente = cliente;
-        this.fecha = fecha;
-        this.total = total;
+    public PedidoDTO() {
     }
 
     public Integer getIdPedido() {
@@ -26,14 +42,6 @@ public class PedidoDTO {
 
     public void setIdPedido(Integer idPedido) {
         this.idPedido = idPedido;
-    }
-
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
     }
 
     public LocalDateTime getFecha() {
@@ -52,6 +60,14 @@ public class PedidoDTO {
         this.total = total;
     }
 
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+    
     
     
 }

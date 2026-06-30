@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ECOMMERCE.dto.CategoriaDTO;
 import com.example.ECOMMERCE.model.Categoria;
 import com.example.ECOMMERCE.service.CategoriaService;
 
@@ -27,7 +28,7 @@ public class CategoriaController {
     }
 
     @GetMapping("/categorias")
-    public List<Categoria> listarCategorias(){
+    public List<CategoriaDTO> listarCategorias(){
         return categoriaService.listarCategoria();
     }
 

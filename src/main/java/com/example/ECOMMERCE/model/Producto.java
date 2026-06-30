@@ -7,9 +7,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "producto")
@@ -19,17 +16,12 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message="El nombre es obligatorio")
     private String nombre;
 
-    @Positive(message="El precio debe ser mayor a 0")
     private Double precio;
 
-    @NotBlank(message="La marca es obligatorio")
     private String marca;
 
-    @Min(value = 1,
-     message = "La garantía debe ser mayor o igual a 1")
     private Integer garantia;
 
     @ManyToOne
