@@ -31,86 +31,42 @@ public class PedidoDetalleService {
     //LISTAR PEDIDO DETALLE
     public List<PedidoDetalleDTO> listarPedidoDetalles(){
 
-    List<PedidoDetalle> detalles =
-            pedidoDetalleRepository.findAll();
+        List<PedidoDetalleDTO> pedidoDetalleDTO = new ArrayList<>();
+        List<PedidoDetalle> detalles = pedidoDetalleRepository.findAll();
+        
+        for(PedidoDetalle detalle : detalles){
 
-    List<PedidoDetalleDTO> dtos =
-            new ArrayList<>();
+            PedidoDetalleDTO dto = new PedidoDetalleDTO();
 
+                dto.setIdDetalle(detalle.getIdDetalle());
+                dto.setCantidad(detalle.getCantidad());
+                dto.setSubtotal(detalle.getSubTotal());
 
-    for(PedidoDetalle detalle : detalles){
-
-        PedidoDetalleDTO dto =
-                new PedidoDetalleDTO();
-
-
-        dto.setIdDetalle(
-                detalle.getIdDetalle()
-        );
-
-
-        dto.setCantidad(
-                detalle.getCantidad()
-        );
-
-
-        dto.setSubtotal(
-
-        detalle.getSubTotal()
-
-);
-
-
-        dto.setProducto(
-
-                detalle.getProducto()!=null ?
-
-                detalle.getProducto().getNombre()
-
-                :
-
+                dto.setProducto(detalle.getProducto() != null ?
+                                detalle.getProducto().getNombre() :
                 "Sin producto"
-
         );
 
-
-        dto.setIdPedido(
-
-                detalle.getPedido()!=null ?
-
-                detalle.getPedido().getIdPedido()
-
-                :
-
-                null
-
+        dto.setIdPedido(detalle.getPedido() != null ?
+                        detalle.getPedido().getIdPedido() : null
         );
 
-
-        dto.setCliente(
-
-                detalle.getPedido()!=null
-                && detalle.getPedido().getCliente()!=null
-
-                ?
-
-                detalle.getPedido()
-                        .getCliente()
-                        .getNombre()
-
-                :
-
+        dto.setCliente(detalle.getPedido() != null
+                        && detalle.getPedido().getCliente() != null ?
+                           detalle.getPedido()
+                                  .getCliente()
+                                  .getNombre() :
                 "Sin cliente"
 
         );
 
 
-        dtos.add(dto);
+        pedidoDetalleDTO.add(dto);
 
-    }
+                }
 
-    return dtos;
-}
+                return pedidoDetalleDTO;
+        }
 
 
     //BUSCAR PEDIDO DETALLE
